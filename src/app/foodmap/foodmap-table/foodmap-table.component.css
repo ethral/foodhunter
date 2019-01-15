@@ -1,0 +1,31 @@
+
+
+table {
+    width: 100%;
+    background: #595959;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  td{
+    width: 18%;
+    color:white;
+  }
+
+  th{
+    width: 18%;
+    color:white;
+  }
+
+  .foodmap-full-width {
+    width: 30%;
+  }
+ 
+  .mat-button, .mat-raised-button{
+    background-color:#595959;
+} 
+
+

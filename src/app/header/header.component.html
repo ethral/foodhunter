@@ -1,3 +1,66 @@
-<p>
-  header works!
-</p>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a routerLink="/" class="navbar-brand" style="color:white;">foodhunter.com</a>
+    </div>
+
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li><a mat-button style="color:white;" routerLink="/foodmaps">Foodmaps</a></li>
+        
+       
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <ng-template  [ngIf]="!isAuthenticated()">
+            <li><a mat-button style="color:white;" routerLink="/signup">Register</a></li>
+            <li><a mat-button style="color:white;" routerLink="/signin">Login</a></li>
+        </ng-template>
+        <li><a style="cursor: pointer;" (click)="onLogout()" *ngIf="isAuthenticated()" style="color:white;">Logout</a></li>
+      
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<!-- <mat-toolbar>
+  <span>foodhunter</span>
+ 
+ 
+
+    
+     <span class="navstyle">
+        <ul class="nav navbar-nav navbar-right">
+            <ng-template  [ngIf]="!isAuthenticated()">
+                <li><a mat-button  routerLink="/signup">Register</a></li>
+                <li><a mat-button  routerLink="/signin">Login</a></li>
+            </ng-template>
+            <li><a style="cursor: pointer;" (click)="onLogout()" *ngIf="isAuthenticated()" style="color:white;">Logout</a></li>
+          
+            
+          </ul>
+    </span>
+  
+  </mat-toolbar>  -->
+
+
+<!-- <li class="dropdown">
+          <a style="cursor: pointer;" class="dropdown-toggle" role="button">Manage <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a style="cursor: pointer;" (click)="onSaveData()">Save Data</a></li>
+            <li><a style="cursor: pointer;" (click)="fetchData()">Fetch Data</a></li>
+          </ul>
+        </li>
+
+        <mat-toolbar class="navstyle" color="accent">
+            <span>Application Title</span>
+          
+             This fills the remaining space of the current row 
+            <span class="example-fill-remaining-space"></span>
+          
+            <span>Right Aligned Text</span>
+        </mat-toolbar> -->

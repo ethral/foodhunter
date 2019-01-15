@@ -1,0 +1,20 @@
+<a
+  style="cursor: pointer;"
+  [@list1]
+  [ngClass]="setRatingClass(foodmap)"
+  class="list-group-item clearfix">
+  <div class="pull-left">
+    <h4 class="list-group-item-heading">{{ foodmap.name }}</h4>
+    <p class="list-group-item-text">{{ foodmap.description }} - {{foodmap.city}}, {{foodmap.state}} , {{foodmap.country}}</p>
+  </div>
+  <span class="pull-right">
+        
+          <h4 class="list-group-item-heading">Rating</h4>
+    <p class="list-group-item-text pull-center"><span class="badge">{{ foodmap.rating }}/5</span></p>
+    
+      </span>
+</a>
+
+
+
+

@@ -1,0 +1,27 @@
+.main-div{
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+  .example-card{
+    width: 40%;
+    align-items: center;
+    
+  }
+
+  .example-full-width{
+      width: 90%;
+  }
+
+  .foodmap-full-width{
+    width: 90%;
+}
+
+.card-container-center{
+    
+    text-align:center;
+  
+}
+

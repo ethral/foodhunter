@@ -1,3 +1,56 @@
-<p>
-  signup works!
-</p>
+<!-- <div class="row">
+  <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <form  (ngSubmit)="onSignUp(f)" #f="ngForm">
+          
+          <mat-form-field class="foodmap-full-width">
+            <input type="email" name="email" ngModel  required matInput placeholder="Email">
+        </mat-form-field>
+        
+        <mat-form-field class="foodmap-full-width">
+          <input type="password" name="password" ngModel  required matInput placeholder="Password">
+        </mat-form-field>
+          <p>{{ ErrorMsg }}</p>
+         
+          
+          
+            <button mat-raised-button   color="accent" type="submit"  [disabled]="!f.valid">Sign Up</button>
+            
+          
+        
+        </form>
+
+  </div> 
+</div> -->
+
+
+
+
+<div class="main-div">
+    <mat-card class="example-card">
+      <mat-card-header >
+        <mat-card-title class="card-container-center">Register</mat-card-title>
+      </mat-card-header>
+      <mat-card-content align="center">
+        <form (ngSubmit)="onSignUp(f)" #f="ngForm" class="example-form">
+          <table class="example-full-width" cellspacing="0">
+            <tr>
+              <td>
+                <mat-form-field class="foodmap-full-width">
+                  <input type="email" name="email" ngModel  required matInput placeholder="Email">
+              </mat-form-field>
+              </td>
+            </tr>
+            <tr>
+            <td> <mat-form-field class="foodmap-full-width">
+              <input type="password" name="password" ngModel  required matInput placeholder="Password">
+            </mat-form-field>
+              </td>
+          </tr></table><p>{{ ErrorMsg }}</p>
+        </form>
+      </mat-card-content>
+      <mat-card-actions align="center">
+        <button mat-raised-button   color="accent" type="submit"  [disabled]="!f.valid" >Register</button>
+      </mat-card-actions>
+      
+    </mat-card>
+    </div>

@@ -1,0 +1,47 @@
+<div class="inputform">
+<h2>Foodmaps Entry</h2>
+<hr>
+
+<form class="foodmap-form" (ngSubmit)="onSubmitItem(f)" #f="ngForm">
+    <mat-form-field class="foodmap-full-width">
+      <input type="text" name="name" ngModel  required matInput placeholder="Food Place">
+    </mat-form-field>
+   
+  
+    <mat-form-field class="foodmap-full-width">
+      <textarea name="description" ngModel  required matInput placeholder="Description"></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="foodmap-full-width">
+        <input type="text" name="streetAddress" ngModel  required matInput placeholder="Street Address">
+    </mat-form-field>
+
+    <mat-form-field class="foodmap-full-width">
+        <input type="text" name="city" ngModel  required matInput placeholder="City">
+    </mat-form-field>
+
+    <mat-form-field class="foodmap-full-width">
+        <input type="text" name="state" ngModel  required matInput placeholder="State">
+    </mat-form-field>
+
+    <mat-form-field class="foodmap-full-width">
+        <input type="text" name="country" ngModel  required matInput placeholder="Country">
+    </mat-form-field>
+
+    <mat-form-field class="foodmap-full-width">
+        <input type="number" name="rating" ngModel  required matInput placeholder="Rating">
+    </mat-form-field>
+  
+    
+ <div class="btn-toolbar" style="float:right;">
+    <button mat-raised-button   color="accent" type="submit" style="margin-right:10px" [disabled]="!f.valid">{{ editMode ? 'Update' : 'Add'}}</button>
+    <button class="btn btn-danger" type="button" (click)="onDelete()"
+          *ngIf="editMode">Delete</button>
+    <button mat-raised-button color="warn" type="button" (click)="onClear()">Clear</button>
+  
+</div>
+</form>
+
+</div>
+
+

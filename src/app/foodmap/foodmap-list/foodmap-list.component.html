@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-xs-12 btn-toolbar">
+    <!-- <button class="btn btn-success" (click)="onSaveFoodMaps()">Save Data</button> -->
+    <!-- <button class="btn btn-success" (click)="getFoodMaps()">Refresh</button> -->
+    <button mat-raised-button color="primary" (click)="getFoodMaps()" style="margin-right:10px">Add</button>
+    <button mat-raised-button color="accent" (click)="getFoodMaps()">Refresh</button>
+    <!-- <button class="btn btn-success" (click)="setIsAdmin()">Admin</button> -->
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-xs-12 btn-toolbar">
+      <!-- <label for="filteredStatus">Search</label>
+    
+    <input type="text"
+    id="filteredStatus"
+      class="form-control"
+      name="filteredStatus"
+      [(ngModel)]="filteredStatus"> -->
+      <mat-form-field class="foodmap-full-width">
+          <input type="text" id="filteredStatus" name="filteredStatus" [(ngModel)]="filteredStatus" matInput placeholder="Search">
+        </mat-form-field><span><i class="material-icons">
+            search
+            </i></span>
+    
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-xs-12">
+    <app-foodmap-item
+   
+      *ngFor="let foodmapEl of foodmaps| filter:filteredStatus:'name'; let i = index "
+      [foodmap]="foodmapEl"
+      [index]="i"
+      
+      ></app-foodmap-item>
+  </div>
+</div>
+
+
