@@ -92,7 +92,7 @@ export class HomeComponent implements OnInit {
         options: {
           title: {
             display: true,
-            text: 'FoodMaps around the world',
+            text: 'FoodMaps around the World',
           },
           animation: {
             animateRotate: true,
