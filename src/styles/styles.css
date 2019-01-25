@@ -1,0 +1,31 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+/* @import 'https://unpkg.com/@angular/material/prebuilt-themes/indigo-pink.css';
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons'; */
+
+.mat-sort-header-arrow {
+    color: #fff !important;
+    opacity: 1 !important;
+    }
+
+    html,head,body { background: #f2f2f2; }
+
+
+    
+
+.navbar-default {
+            background-color: #595959;
+            background-image: none;
+            background-repeat: no-repeat;
+           }
+
+.mat-card-header-text{
+            width: 100% !important;
+          }
+
+
+          .mat-toolbar ,.mat-toolbar{
+            background: #595959;
+            color:white;
+            
+          } 

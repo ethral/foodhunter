@@ -1,0 +1,13 @@
+/*
+  Layout related classes such as container,
+  row, column, etc will live in this file. Mostly
+  we can just use flexbox at the component level
+  as opposed to adding global styles here.
+*/
+
+.container {
+  display: block;
+  margin: auto;
+  max-width: 1200px;
+  padding: 0 15px;
+}
