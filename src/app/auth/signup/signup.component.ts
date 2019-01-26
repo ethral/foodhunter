@@ -8,46 +8,33 @@ import { Subscription } from 'rxjs';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
-export class SignupComponent implements OnInit,OnDestroy {
+export class SignupComponent implements OnInit, OnDestroy {
+  ErrorMsg: string;
 
-  ErrorMsg : string;
+  subscription: Subscription;
 
-  subscription : Subscription;
-  
-  constructor(private authService : AuthService) { }
+  constructor(private authService: AuthService) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  onSignUp(form: NgForm){
-
+  onSignUp(form: NgForm) {
     this.ErrorMsg = '';
     const email = form.value.email;
     const password = form.value.password;
 
-    
-
-    this.authService.signupUser(email,password);
+    this.authService.signupUser(email, password);
     // setTimeout(()=>{
     //   console.log(this.authService.errorMsg)
     // },2000);
 
-    this.subscription = this.authService.errorMsgReceived.subscribe(
-      (error: string) => {
-
-        this.ErrorMsg = error;
-        
-
-      }
-    );
-
+    this.subscription = this.authService.errorMsgReceived.subscribe((error: string) => {
+      this.ErrorMsg = error;
+    });
   }
 
-  ngOnDestroy(){
-
-    if(this.subscription){
-    this.subscription.unsubscribe();
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
     }
   }
-
 }

@@ -15,25 +15,22 @@ import { FoodmapEditComponent } from './foodmap/foodmap-edit/foodmap-edit.compon
 import { FoodmapDetailComponent } from './foodmap/foodmap-detail/foodmap-detail.component';
 import { FoodmapItemComponent } from './foodmap/foodmap-list/foodmap-item/foodmap-item.component';
 import { FoodMapService } from './foodmap/foodmap.service';
-import { FormsModule } from "@angular/forms";
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { FilterPipe } from './common/filter.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatRippleModule, MatButtonModule, MatPaginatorModule, } from '@angular/material';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
+import { MatRippleModule, MatButtonModule, MatPaginatorModule } from '@angular/material';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { FoodmapTableComponent } from './foodmap/foodmap-table/foodmap-table.component';
-import {MatTableModule} from '@angular/material/table';
-import {MatSortModule} from '@angular/material/sort';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatCardModule} from '@angular/material/card';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatCardModule } from '@angular/material/card';
 import { AuthService } from './auth/auth.service';
-import {MatToolbarModule} from '@angular/material/toolbar';
-
-
-
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -50,7 +47,6 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     FoodmapItemComponent,
     FilterPipe,
     FoodmapTableComponent
-    
   ],
   entryComponents: [FoodmapEditComponent],
   imports: [
@@ -71,11 +67,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatSnackBarModule,
     MatCardModule,
     MatToolbarModule
-    
-
-
   ],
-  providers: [FoodMapService,AuthService],
+  providers: [FoodMapService, AuthService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

@@ -5,9 +5,8 @@ import { Pipe, PipeTransform } from '@angular/core';
   pure: false
 })
 export class FilterPipe implements PipeTransform {
-
   transform(value: any, filterString: string, propName: string): any {
-    if(value == null || filterString === ''){
+    if (value == null || filterString === '') {
       return value;
     }
     // const resultArray = [];
@@ -20,18 +19,11 @@ export class FilterPipe implements PipeTransform {
     // }
     // return resultArray;
 
-    return value.filter( it => {
-        return it.name.toLowerCase().includes(filterString.toLowerCase());
-      });
-
+    return value.filter(it => {
+      return it.name.toLowerCase().includes(filterString.toLowerCase());
+    });
   }
-
 }
-
-
-
-
-
 
 // export class FilterPipe implements PipeTransform {
 //     transform(items: any[], searchText: string): any[] {

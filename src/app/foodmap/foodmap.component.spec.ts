@@ -8,9 +8,8 @@ describe('FoodmapComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FoodmapComponent ]
-    })
-    .compileComponents();
+      declarations: [FoodmapComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

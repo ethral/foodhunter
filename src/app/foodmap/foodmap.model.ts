@@ -1,4 +1,3 @@
-
 export class FoodMap {
   public name: string;
   public description: string;
@@ -6,10 +5,17 @@ export class FoodMap {
   public city: string;
   public state: string;
   public country: string;
-  public rating : number;
-  
+  public rating: number;
 
-  constructor(name: string, desc: string, stAdd: string, city: string , state: string, country: string, rating : number) {
+  constructor(
+    name: string,
+    desc: string,
+    stAdd: string,
+    city: string,
+    state: string,
+    country: string,
+    rating: number
+  ) {
     this.name = name;
     this.description = desc;
     this.streetAddress = stAdd;
@@ -17,7 +23,5 @@ export class FoodMap {
     this.state = state;
     this.country = country;
     this.rating = rating;
-    
-   
   }
 }
