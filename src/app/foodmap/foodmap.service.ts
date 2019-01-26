@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpParams, HttpRequest } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { FoodMap } from './foodmap.model';
@@ -53,7 +53,7 @@ export class FoodMapService {
   //   }
 
   saveFoodMaps(foodmaps: FoodMap[]) {
-    //const token = this.authService.getToken();
+    // const token = this.authService.getToken();
 
     return this.httpClient.put<FoodMap[]>(
       'https://foodhunter-db.firebaseio.com/FoodMap.json',
