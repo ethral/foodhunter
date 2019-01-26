@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "format": "prettier --config .prettierrc --write -l  \"src/app/**/*.ts\""
+    "format": "prettier --staged --config .prettierrc --write -l  \"src/app/**/*.ts\""
   },
   "pre-commit": [
     "format"

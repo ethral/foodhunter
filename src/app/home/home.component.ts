@@ -1,8 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import Chart from 'chart.js';
-import { animation } from '@angular/animations';
 import { FoodMapService } from '../foodmap/foodmap.service';
-import { FoodmapComponent } from '../foodmap/foodmap.component';
 import { FoodMap } from '../foodmap/foodmap.model';
 
 @Component({
@@ -26,10 +24,10 @@ export class HomeComponent implements OnInit {
   brazilc = 0;
   chinac = 0;
 
-  public constructor(private FoodMapService: FoodMapService) {}
+  public constructor(private foodMapService: FoodMapService) {}
 
   public ngOnInit() {
-    this.FoodMapService.fetchFoodMaps().subscribe(response => {
+    this.foodMapService.fetchFoodMaps().subscribe(response => {
       this.foodmaps = (Object as any).values(response);
       console.log(this.foodmaps);
     });
@@ -52,9 +50,9 @@ export class HomeComponent implements OnInit {
         }
       }
 
-      let chart = this.refChart.nativeElement;
-      let ctx = chart.getContext('2d');
-      let myChart = new Chart(ctx, {
+      const chart = this.refChart.nativeElement;
+      const ctx = chart.getContext('2d');
+      const myChart = new Chart(ctx, {
         type: 'doughnut',
         data: {
           labels: ['USA', 'India', 'Japan', 'Brazil', 'China'],
