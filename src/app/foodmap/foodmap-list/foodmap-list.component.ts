@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { Subscription, Subject } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { FoodMap } from '../foodmap.model';
 import { FoodMapService } from '../foodmap.service';
 
@@ -15,16 +15,16 @@ export class FoodmapListComponent implements OnInit, OnDestroy {
   filteredStatus = '';
   foodmapAddedSubscription: Subscription;
 
-  constructor(private FoodMapService: FoodMapService) {}
+  constructor(private foodMapService: FoodMapService) {}
 
   ngOnInit() {
-    //on page initialization - list is loaded
-    this.FoodMapService.fetchFoodMaps().subscribe(response => {
+    // on page initialization - list is loaded
+    this.foodMapService.fetchFoodMaps().subscribe(response => {
       this.foodmaps = (Object as any).values(response);
       console.log(this.foodmaps);
     });
 
-    this.foodmapRefreshsubscription = this.FoodMapService.FoodMapsChanged.subscribe(
+    this.foodmapRefreshsubscription = this.foodMapService.FoodMapsChanged.subscribe(
       (foodmaps: FoodMap[]) => {
         this.foodmaps = foodmaps;
 
@@ -32,7 +32,7 @@ export class FoodmapListComponent implements OnInit, OnDestroy {
       }
     );
 
-    this.foodmapAddedSubscription = this.FoodMapService.FoodMapAdded.subscribe(
+    this.foodmapAddedSubscription = this.foodMapService.FoodMapAdded.subscribe(
       (foodmap: FoodMap) => {
         this.foodmaps.push(foodmap);
       }
@@ -40,12 +40,12 @@ export class FoodmapListComponent implements OnInit, OnDestroy {
   }
 
   getFoodMaps() {
-    this.FoodMapService.fetchFoodMaps().subscribe(response => {
+    this.foodMapService.fetchFoodMaps().subscribe(response => {
       this.foodmaps = (Object as any).values(response);
       console.log(this.foodmaps);
     });
 
-    this.FoodMapService.FoodMapsChanged.next(this.foodmaps.slice());
+    this.foodMapService.FoodMapsChanged.next(this.foodmaps.slice());
   }
 
   ngOnDestroy() {

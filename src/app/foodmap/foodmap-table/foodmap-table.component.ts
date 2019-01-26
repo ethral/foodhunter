@@ -1,16 +1,9 @@
-import { Component, OnInit, OnDestroy, ViewChild, Inject } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
-import {
-  MatPaginator,
-  MatSort,
-  MatTableDataSource,
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA
-} from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
 import { FoodmapEditComponent } from '../foodmap-edit/foodmap-edit.component';
 import { SelectionModel } from '@angular/cdk/collections';
-import { Subscription, Subject } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { FoodMap } from '../foodmap.model';
 import { FoodMapService } from '../foodmap.service';
 
@@ -27,34 +20,6 @@ export class FoodmapTableComponent implements OnInit {
   dataSource: MatTableDataSource<FoodMap>;
   selection = new SelectionModel<FoodMap>(true, []);
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-
-  constructor(private FoodMapService: FoodMapService, public dialog: MatDialog) {}
-
-  ngOnInit() {
-    //on page initialization - list is loaded
-    this.FoodMapService.fetchFoodMaps().subscribe(response => {
-      this.foodmaps = (Object as any).values(response);
-      console.log(this.foodmaps);
-      this.dataSource = new MatTableDataSource(this.foodmaps);
-    });
-    setTimeout(() => {
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    }, 200);
-
-    this.foodmapAddedSubscription = this.FoodMapService.FoodMapAdded.subscribe(
-      (foodmap: FoodMap) => {
-        this.foodmaps.push(foodmap);
-        this.dataSource = new MatTableDataSource(this.foodmaps);
-
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      }
-    );
-  }
-
   displayedColumns: string[] = [
     'select',
     'name',
@@ -65,6 +30,34 @@ export class FoodmapTableComponent implements OnInit {
     'country',
     'rating'
   ];
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
+  constructor(private foodMapService: FoodMapService, public dialog: MatDialog) {}
+
+  ngOnInit() {
+    // on page initialization - list is loaded
+    this.foodMapService.fetchFoodMaps().subscribe(response => {
+      this.foodmaps = (Object as any).values(response);
+      console.log(this.foodmaps);
+      this.dataSource = new MatTableDataSource(this.foodmaps);
+    });
+    setTimeout(() => {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }, 200);
+
+    this.foodmapAddedSubscription = this.foodMapService.FoodMapAdded.subscribe(
+      (foodmap: FoodMap) => {
+        this.foodmaps.push(foodmap);
+        this.dataSource = new MatTableDataSource(this.foodmaps);
+
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      }
+    );
+  }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();

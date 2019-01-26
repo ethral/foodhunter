@@ -101,7 +101,7 @@ export class FoodmapItemComponent implements OnInit {
   }) {
     return {
       'list-group-item-success': foodmap.rating >= 3,
-      //'list-group-item-warning': foodmap.rating === 4,
+      // 'list-group-item-warning': foodmap.rating === 4,
       'list-group-item-danger': foodmap.rating >= 0 && foodmap.rating <= 2
     };
   }
