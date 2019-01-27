@@ -18,7 +18,8 @@ export class FoodmapTableComponent implements OnInit {
   filteredStatus = '';
   foodmapAddedSubscription: Subscription;
   dataSource: MatTableDataSource<FoodMap>;
-  selection = new SelectionModel<FoodMap>(true, []);
+  selection = new SelectionModel<FoodMap>(false, []);
+  editMode = false;
 
   displayedColumns: string[] = [
     'select',
@@ -57,6 +58,9 @@ export class FoodmapTableComponent implements OnInit {
         this.dataSource.sort = this.sort;
       }
     );
+    this.selection.changed.subscribe(data => {
+      this.editMode = this.selection.selected.length > 0 ? true : false;
+    });
   }
 
   applyFilter(filterValue: string) {
@@ -67,13 +71,27 @@ export class FoodmapTableComponent implements OnInit {
     }
   }
   openDialog(): void {
-    const dialogRef = this.dialog.open(FoodmapEditComponent, {
-      width: '400px'
-    });
+    if (this.editMode) {
+      const dialogRef = this.dialog.open(FoodmapEditComponent, {
+        width: '400px',
+        data: {
+          selection: this.selection.selected,
+          editMode: this.editMode
+        }
+      });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The edit dialog was closed');
+      });
+    } else {
+      const dialogRef = this.dialog.open(FoodmapEditComponent, {
+        width: '400px'
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The new dialog was closed');
+      });
+    }
   }
 
   /** Whether the number of selected elements matches the total number of rows. */

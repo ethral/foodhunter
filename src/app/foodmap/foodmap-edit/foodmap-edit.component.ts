@@ -18,11 +18,30 @@ export class FoodmapEditComponent implements OnInit {
   constructor(
     private foodmapService: FoodMapService,
     public dialogRef: MatDialogRef<FoodmapEditComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: FoodMap,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     public snackBar: MatSnackBar
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.data) {
+      this.editMode = this.data.editMode;
+      if (this.editMode) {
+        console.log(this.data.selection);
+
+        setTimeout(() => {
+          this.slForm.setValue({
+            name: this.data.selection[0].name,
+            description: this.data.selection[0].description,
+            streetAddress: this.data.selection[0].streetAddress,
+            city: this.data.selection[0].city,
+            state: this.data.selection[0].state,
+            country: this.data.selection[0].country,
+            rating: this.data.selection[0].rating
+          });
+        }, 10);
+      }
+    }
+  }
 
   onSubmitItem(form: NgForm) {
     const value = form.value;
@@ -48,9 +67,15 @@ export class FoodmapEditComponent implements OnInit {
     this.dialogRef.close();
   }
   openSnackBar() {
-    this.snackBar.open('Data has successfully been posted!!', '', {
-      duration: 2000
-    });
+    if (this.editMode) {
+      this.snackBar.open('Data has successfully been updated!!', '', {
+        duration: 2000
+      });
+    } else {
+      this.snackBar.open('Data has successfully been posted!!', '', {
+        duration: 2000
+      });
+    }
   }
 
   onClear() {
