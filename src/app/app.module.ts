@@ -31,6 +31,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
 import { AuthService } from './auth/auth.service';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { config } from 'src/firebase.config';
 
 @NgModule({
   declarations: [
@@ -66,7 +69,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatDialogModule,
     MatSnackBarModule,
     MatCardModule,
-    MatToolbarModule
+    MatToolbarModule,
+    AngularFireModule.initializeApp(config),
+    AngularFireDatabaseModule
   ],
   providers: [FoodMapService, AuthService],
   bootstrap: [AppComponent]

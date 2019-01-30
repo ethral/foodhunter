@@ -19,10 +19,10 @@ export class FoodmapListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // on page initialization - list is loaded
-    this.foodMapService.fetchFoodMaps().subscribe(response => {
-      this.foodmaps = (Object as any).values(response);
-      console.log(this.foodmaps);
-    });
+    // this.foodMapService.fetchFoodMaps().subscribe(response => {
+    //   this.foodmaps = (Object as any).values(response);
+    //   console.log(this.foodmaps);
+    // });
 
     this.foodmapRefreshsubscription = this.foodMapService.FoodMapsChanged.subscribe(
       (foodmaps: FoodMap[]) => {
@@ -40,12 +40,11 @@ export class FoodmapListComponent implements OnInit, OnDestroy {
   }
 
   getFoodMaps() {
-    this.foodMapService.fetchFoodMaps().subscribe(response => {
-      this.foodmaps = (Object as any).values(response);
-      console.log(this.foodmaps);
-    });
-
-    this.foodMapService.FoodMapsChanged.next(this.foodmaps.slice());
+    // this.foodMapService.fetchFoodMaps().subscribe(response => {
+    //   this.foodmaps = (Object as any).values(response);
+    //   console.log(this.foodmaps);
+    // });
+    // this.foodMapService.FoodMapsChanged.next(this.foodmaps.slice());
   }
 
   ngOnDestroy() {

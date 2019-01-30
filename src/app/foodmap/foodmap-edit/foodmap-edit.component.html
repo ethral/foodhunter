@@ -37,7 +37,7 @@
     <button mat-raised-button   color="accent" type="submit" style="margin-right:10px" [disabled]="!f.valid">{{ editMode ? 'Update' : 'Add'}}</button>
     <!-- <button class="btn btn-danger" type="button" (click)="onDelete()"
           *ngIf="editMode">Delete</button> -->
-    <button mat-raised-button color="warn" type="button" (click)="onClear()">Clear</button>
+    <button mat-raised-button color="warn" type="button" *ngIf="!editMode" (click)="onClear()">Clear</button>
   
 </div>
 </form>

@@ -4,6 +4,7 @@ import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/m
 import { FoodmapEditComponent } from '../foodmap-edit/foodmap-edit.component';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { FoodMap } from '../foodmap.model';
 import { FoodMapService } from '../foodmap.service';
 
@@ -39,28 +40,41 @@ export class FoodmapTableComponent implements OnInit {
 
   ngOnInit() {
     // on page initialization - list is loaded
-    this.foodMapService.fetchFoodMaps().subscribe(response => {
-      this.foodmaps = (Object as any).values(response);
-      console.log(this.foodmaps);
-      this.dataSource = new MatTableDataSource(this.foodmaps);
-    });
-    setTimeout(() => {
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    }, 200);
+    this.getFoodmaps();
+    // this.foodMapService.fetchFoodMaps().subscribe(response => {
+    //   this.foodmaps = (Object as any).values(response);
+    //   console.log(this.foodmaps);
+    //   this.dataSource = new MatTableDataSource(this.foodmaps);
+    // });
+    // setTimeout(() => {
+    // }, 200);
 
-    this.foodmapAddedSubscription = this.foodMapService.FoodMapAdded.subscribe(
-      (foodmap: FoodMap) => {
-        this.foodmaps.push(foodmap);
-        this.dataSource = new MatTableDataSource(this.foodmaps);
+    // this.foodmapAddedSubscription = this.foodMapService.FoodMapAdded.subscribe(
+    //   (foodmap: FoodMap) => {
+    //     this.foodmaps.push(foodmap);
+    //     this.dataSource = new MatTableDataSource(this.foodmaps);
 
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      }
-    );
+    //     this.dataSource.paginator = this.paginator;
+    //     this.dataSource.sort = this.sort;
+    //   }
+    // );
     this.selection.changed.subscribe(data => {
       this.editMode = this.selection.selected.length > 0 ? true : false;
     });
+  }
+
+  getFoodmaps() {
+    this.foodMapService
+      .getFoodmaps()
+      .snapshotChanges()
+      .pipe(map(changes => changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))))
+      .subscribe(foodmaps => {
+        this.foodmaps = foodmaps;
+        this.dataSource = new MatTableDataSource(this.foodmaps);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        console.log(this.foodmaps);
+      });
   }
 
   applyFilter(filterValue: string) {
@@ -81,6 +95,7 @@ export class FoodmapTableComponent implements OnInit {
       });
 
       dialogRef.afterClosed().subscribe(result => {
+        this.selection.clear();
         console.log('The edit dialog was closed');
       });
     } else {

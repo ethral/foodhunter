@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import * as firebase from 'firebase';
+// import * as firebase from 'firebase';
 
-import { config } from 'src/firebase.config';
+// import { config } from 'src/firebase.config';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +14,6 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     // firebase SDK getting initialized during the start up of the app
     // auth functionality provided out of the box by firebase
-    firebase.initializeApp(config);
+    // firebase.initializeApp(config);
   }
 }

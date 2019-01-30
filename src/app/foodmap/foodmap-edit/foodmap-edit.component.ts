@@ -45,22 +45,36 @@ export class FoodmapEditComponent implements OnInit {
 
   onSubmitItem(form: NgForm) {
     const value = form.value;
-    const newFoodMap = new FoodMap(
-      value.name,
-      value.description,
-      value.streetAddress,
-      value.city,
-      value.state,
-      value.country,
-      value.rating
-    );
-    this.foodmapService
-      .saveFoodMap(newFoodMap)
-      .subscribe(foodmap => console.log('The saved foodmap: ', foodmap));
-    this.foodmapService.FoodMapAdded.next(newFoodMap);
-    form.reset();
-    this.dialogRef.close();
-    this.openSnackBar();
+    if (this.editMode) {
+      this.foodmapService.updateFoodmap(this.data.selection[0].key, {
+        name: value.name,
+        description: value.description,
+        streetAdress: value.streetAddress,
+        city: value.city,
+        state: value.state,
+        country: value.country,
+        rating: value.rating
+      });
+      console.log('foodmap has been updated!');
+      form.reset();
+      this.dialogRef.close();
+      this.openSnackBar();
+    } else {
+      const newFoodMap = new FoodMap(
+        value.name,
+        value.description,
+        value.streetAddress,
+        value.city,
+        value.state,
+        value.country,
+        value.rating
+      );
+      this.foodmapService.createFoodmap(newFoodMap);
+      console.log('foodmap has been created!');
+      form.reset();
+      this.dialogRef.close();
+      this.openSnackBar();
+    }
   }
 
   onNoClick(): void {

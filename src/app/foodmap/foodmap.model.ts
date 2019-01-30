@@ -6,6 +6,7 @@ export class FoodMap {
   public state: string;
   public country: string;
   public rating: number;
+  public key?: string;
 
   constructor(
     name: string,
@@ -14,7 +15,8 @@ export class FoodMap {
     city: string,
     state: string,
     country: string,
-    rating: number
+    rating: number,
+    key?: string
   ) {
     this.name = name;
     this.description = desc;
@@ -23,5 +25,8 @@ export class FoodMap {
     this.state = state;
     this.country = country;
     this.rating = rating;
+    if (key) {
+      this.key = key;
+    }
   }
 }
