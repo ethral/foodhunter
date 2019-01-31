@@ -49,7 +49,7 @@ export class FoodmapEditComponent implements OnInit {
       this.foodmapService.updateFoodmap(this.data.selection[0].key, {
         name: value.name,
         description: value.description,
-        streetAdress: value.streetAddress,
+        streetAddress: value.streetAddress,
         city: value.city,
         state: value.state,
         country: value.country,
