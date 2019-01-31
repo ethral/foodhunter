@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FoodMap } from '../foodmap.model';
 import { FoodMapService } from '../foodmap.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-foodmap-table',
@@ -36,7 +37,11 @@ export class FoodmapTableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private foodMapService: FoodMapService, public dialog: MatDialog) {}
+  constructor(
+    private foodMapService: FoodMapService,
+    public dialog: MatDialog,
+    public snackBar: MatSnackBar
+  ) {}
 
   ngOnInit() {
     // on page initialization - list is loaded
@@ -75,6 +80,12 @@ export class FoodmapTableComponent implements OnInit {
         this.dataSource.sort = this.sort;
         console.log(this.foodmaps);
       });
+  }
+
+  deleteFoodmap(key: string) {
+    this.foodMapService.deleteFoodmap(key);
+    this.openSnackBar();
+    this.selection.clear();
   }
 
   applyFilter(filterValue: string) {
@@ -121,5 +132,11 @@ export class FoodmapTableComponent implements OnInit {
     this.isAllSelected()
       ? this.selection.clear()
       : this.dataSource.data.forEach(row => this.selection.select(row));
+  }
+
+  openSnackBar() {
+    this.snackBar.open('Data has successfully been deleted!!', '', {
+      duration: 2000
+    });
   }
 }
