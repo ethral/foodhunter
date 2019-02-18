@@ -843,6 +843,11 @@ MIT
 
 @angular/material/card
 
+@angular/fire/auth
+MIT
+
+firebase/auth
+
 @angular/material/dialog
 
 @angular/material/snack-bar
