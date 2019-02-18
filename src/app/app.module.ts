@@ -33,7 +33,9 @@ import { AuthService } from './auth/auth.service';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import { config } from 'src/firebase.config';
+import { AuthGuard } from './auth/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -71,9 +73,10 @@ import { config } from 'src/firebase.config';
     MatCardModule,
     MatToolbarModule,
     AngularFireModule.initializeApp(config),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
-  providers: [FoodMapService, AuthService],
+  providers: [FoodMapService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -26,8 +26,9 @@
   <mat-card-header >
     <mat-card-title class="card-container-center">Login</mat-card-title>
   </mat-card-header>
+  <form (ngSubmit)="onSignIn(f)" #f="ngForm" class="example-form">
   <mat-card-content align="center">
-    <form (ngSubmit)="onSignIn(f)" #f="ngForm" class="example-form">
+   
       <table class="example-full-width" cellspacing="0">
         <tr>
           <td>
@@ -42,13 +43,13 @@
         </mat-form-field>
           </td>
       </tr></table>
-      <!-- <p>{{ ErrorMsg }}</p> -->
-    </form>
+      <p>{{ errorMessage }}</p>
+    
   </mat-card-content>
   <mat-card-actions align="center">
     <button mat-raised-button   color="accent" type="submit"  [disabled]="!f.valid" >Login</button>
   </mat-card-actions>
-  
+</form>
 </mat-card>
 </div>
 

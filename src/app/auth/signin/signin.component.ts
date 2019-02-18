@@ -10,12 +10,28 @@ import { AuthService } from '../auth.service';
 export class SigninComponent implements OnInit {
   constructor(private authService: AuthService) {}
 
+  errorMessage: string;
+  successMessage: string;
+
   ngOnInit() {}
 
   onSignIn(form: NgForm) {
-    const email = form.value.email;
-    const password = form.value.password;
+    // const email = form.value.email;
+    // const password = form.value.password;
 
-    this.authService.signinUser(email, password);
+    // this.authService.signinUser(email, password);
+
+    this.authService.doLogin(form.value).then(
+      res => {
+        console.log(res);
+        this.errorMessage = '';
+        this.successMessage = 'You have successfully signed in';
+      },
+      err => {
+        console.log(err);
+        this.errorMessage = err.message;
+        this.successMessage = '';
+      }
+    );
   }
 }
