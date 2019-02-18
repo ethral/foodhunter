@@ -2,6 +2,7 @@ import * as firebase from 'firebase';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Injectable()
 export class AuthService {
@@ -9,17 +10,45 @@ export class AuthService {
   errorMsgReceived = new Subject<string>();
   token: string;
 
-  constructor(private router: Router) {}
+  constructor(private afAuth: AngularFireAuth, private router: Router) {}
 
-  signupUser(email: string, password: string) {
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .catch(error => {
-        this.errorMsg = error.message;
-        console.log(this.errorMsg);
-        this.errorMsgReceived.next(this.errorMsg);
-      });
+  doRegister(value: any) {
+    return new Promise<any>((resolve, reject) => {
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(value.email, value.password)
+        .then(
+          res => {
+            resolve(res);
+            this.router.navigate(['/']);
+            firebase
+              .auth()
+              .currentUser.getIdToken()
+              .then((token: string) => (this.token = token));
+          },
+          err => reject(err)
+        );
+    });
+  }
+
+  doLogin(value: any) {
+    return new Promise<any>((resolve, reject) => {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(value.email, value.password)
+        .then(
+          res => {
+            resolve(res);
+            this.router.navigate(['/']);
+            firebase
+              .auth()
+              .currentUser.getIdToken()
+              .then((token: string) => (this.token = token));
+          },
+          err => reject(err)
+        )
+        .catch(error => console.log(error));
+    });
   }
 
   signinUser(email: string, password: string) {
