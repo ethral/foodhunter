@@ -6,7 +6,7 @@
       search
       </i></span>
  <span style="float:right;">
- <button mat-raised-button color="primary" (click)="openDialog()">{{editMode ? 'Edit' : 'Add'}} FoodMap</button>
+ <button mat-raised-button color="primary" (click)="openDialog()" *ngIf="adminMode">{{editMode ? 'Edit' : 'Add'}} FoodMap</button>
  <button *ngIf="editMode" mat-raised-button color="primary" (click)="deleteFoodmap(selection.selected[0].key)" style ="margin-left: 5px;">Delete FoodMap</button>
 </span>
 <div class="mat-elevation-z8">
@@ -19,13 +19,13 @@
       <th mat-header-cell *matHeaderCellDef>
         <mat-checkbox (change)="$event ? masterToggle() : null"
                       [checked]="selection.hasValue() && isAllSelected()"
-                      [indeterminate]="selection.hasValue() && !isAllSelected()">
+                      [indeterminate]="selection.hasValue() && !isAllSelected()" *ngIf="adminMode">
         </mat-checkbox>
       </th>
       <td mat-cell *matCellDef="let row">
         <mat-checkbox (click)="$event.stopPropagation()"
                       (change)="$event ? selection.toggle(row) : null"
-                      [checked]="selection.isSelected(row)">
+                      [checked]="selection.isSelected(row)" *ngIf="adminMode">
         </mat-checkbox>
       </td>
     </ng-container>
@@ -67,11 +67,12 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Rating </th>
         <td mat-cell *matCellDef="let element"> {{element.rating}} </td>
      </ng-container>
-  
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <tr mat-header-row *matHeaderRowDef="adminMode ? displayedColumns : displayedColumnsRead"></tr>
+    <tr mat-row *matRowDef="let row; columns: adminMode ? displayedColumns : displayedColumnsRead;"></tr>
   </table>
 
   <mat-paginator  [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
 
 </div>
+

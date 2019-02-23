@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-
 import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
 import { FoodmapEditComponent } from '../foodmap-edit/foodmap-edit.component';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -8,6 +7,7 @@ import { map } from 'rxjs/operators';
 import { FoodMap } from '../foodmap.model';
 import { FoodMapService } from '../foodmap.service';
 import { MatSnackBar } from '@angular/material';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-foodmap-table',
@@ -22,9 +22,20 @@ export class FoodmapTableComponent implements OnInit {
   dataSource: MatTableDataSource<FoodMap>;
   selection = new SelectionModel<FoodMap>(false, []);
   editMode = false;
+  adminMode = true;
 
   displayedColumns: string[] = [
     'select',
+    'name',
+    'description',
+    'streetAddress',
+    'city',
+    'state',
+    'country',
+    'rating'
+  ];
+
+  displayedColumnsRead: string[] = [
     'name',
     'description',
     'streetAddress',
@@ -40,10 +51,17 @@ export class FoodmapTableComponent implements OnInit {
   constructor(
     private foodMapService: FoodMapService,
     public dialog: MatDialog,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    private auth: AuthService
   ) {}
 
   ngOnInit() {
+    this.auth.user.subscribe(user => {
+      if (user) {
+        user.roles.reader ? (this.adminMode = false) : (this.adminMode = true);
+      }
+    });
+
     // on page initialization - list is loaded
     this.getFoodmaps();
     // this.foodMapService.fetchFoodMaps().subscribe(response => {

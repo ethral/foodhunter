@@ -5,6 +5,7 @@
   as opposed to adding global styles here.
 */
 
+
 .container {
   display: block;
   margin: auto;
@@ -12,3 +13,4 @@
   max-width: 1200px;
   padding: 0 15px;
 }
+
